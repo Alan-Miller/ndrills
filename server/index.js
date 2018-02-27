@@ -12,6 +12,8 @@ massive(process.env.CONNECTION_STRING).then(db => {
 app.use(bodyParser.json())
 
 app.get('/api/data', (req, res) => {
+  if (req.query) console.log("QUERY IS", req.query)
+
   // res.status(200).send(data)
   app.get('db').get_data().then(cars => {
     res.status(200).send(cars)
@@ -28,7 +30,7 @@ app.post('/api/data', (req, res) => {
   // res.status(200).send("We got it")
 
 
-  
+
   app.get('db').add_car([req.body.side, req.body.year, req.body.miles, req.body.gas]).then(resp => {
     res.status(200).send(resp)
   })
